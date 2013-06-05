@@ -1,0 +1,41 @@
+<%flash[:errors].try(:each) do |error|%>
+	<%=error%>
+<% end %>
+
+<form action="http://localhost:3000/cats/<%= @cat.id %>" method="post">
+	<input type="hidden" value="put" name="_method">
+	<label for="name">Name</label>
+	<input type="text" name="cat[name]" id="name" value = "<%=@cat.name%>">
+
+	<br />
+
+	<label for="age">Age</label>
+	<input type="text" name="cat[age]" id="age" value = "<%=@cat.age%>">
+
+	<br />
+
+	<label for="birthdate">Birthdate</label>
+	<input type="date" name="cat[birthdate]" id="birthdate" value = 		"<%=@cat.birthdate%>">
+
+	<br />
+
+	<h3>Sex</h3>
+	<input type="radio" name="cat[sex]" id="cat_sex_female" value="female" 			<%='checked' if @cat.sex == 'female'%>>
+	<label for="cat_sex_female">Female</label>
+	<br />
+	<input type="radio" name="cat[sex]" id="cat_sex_male" value="male" 			<%='checked' if @cat.sex == 'male'%>>
+	<label for="cat_sex_male">Male</label>
+
+	<br />
+
+	<label for="cat_color">Coat color</label>
+	<select name="cat[color]">
+		<option value="brown" <%='selected' if @cat.color == 				'brown'%>>Brown</option>
+		<option value="black" <%='selected' if @cat.color == 				'black'%>>Black</option>
+		<option value="white" <%='selected' if @cat.color == 				'white'%>>White</option>
+	</select>
+
+	<br />
+
+	<input type="submit" value="Create cat!">
+</form>
