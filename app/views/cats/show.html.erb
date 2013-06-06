@@ -1,3 +1,9 @@
+<%flash[:errors].try(:each) do |error|%>
+	<%=error%>
+<% end %>
+
+<h2><em>Welcome, <%= @user.username %>!</em></h2>
+
 <h3><%= @cat.name %></h3>
 <ul>
 	<li>Age: <%= @cat.age %></li>

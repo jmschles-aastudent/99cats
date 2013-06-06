@@ -7,6 +7,7 @@ class CatsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @cat = Cat.find(params[:id])
     @rental_requests = CatRentalRequest.where( :cat_id => @cat.id )
     @rental_requests.sort_by! {|request| request.begin_date }
@@ -14,6 +15,7 @@ class CatsController < ApplicationController
   end
 
   def create
+    params[:cat][:owner_id] = current_user.id
     @cat = Cat.new(params[:cat])
     if @cat.save
       render :show

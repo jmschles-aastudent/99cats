@@ -1,0 +1,20 @@
+<%flash[:errors].try(:each) do |error|%>
+	<%=error%>
+<% end %>
+
+<h3>Sign In!</h3>
+
+
+<form action="http://localhost:3000/session" method="post">
+	<label for="username">Username</label>
+	<input type="text" name="username" id="username">
+
+	<br />
+
+	<label for="password">Password</label>
+	<input type="text" name="password" id="password">
+
+	<br />
+
+	<input type="submit" value="Sign in!">
+</form>

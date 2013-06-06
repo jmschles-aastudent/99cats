@@ -24,9 +24,15 @@ class CatRentalRequestsController < ApplicationController
 
   def update
     @cat_rental = CatRentalRequest.find(params[:id])
+    @cat = Cat.find(@cat_rental.cat_id)
+    if current_user.session_token != @cat.owner.session_token || @cat.owner.session_token.nil?
+      flash[:errors] ||= []
+      flash[:errors] << "Not yo cat!"
+      redirect_to cat_url(@cat)
+      return
+    end
     @cat_rental.attributes = params[:cat_rental]
     if @cat_rental.save
-      @cat = Cat.find(params[:cat_rental][:cat_id])
       @cat_rental.approve if @cat_rental.status == 'approved'
       render :show
     else
